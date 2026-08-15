@@ -25,21 +25,21 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build client image
-        run: docker build -t ss4net/multi-client ./client
+        run: docker build -t ss4net1/multi-client ./client
       - name: Push client image
-        run: docker push ss4net/multi-client
+        run: docker push ss4net1/multi-client
 
       - name: Build nginx image
-        run: docker build -t ss4net/multi-nginx ./nginx
+        run: docker build -t ss4net1/multi-nginx ./nginx
       - name: Push nginx image
-        run: docker push ss4net/multi-nginx
+        run: docker push ss4net1/multi-nginx
 
       - name: Build server image
-        run: docker build -t ss4net/multi-server ./server
+        run: docker build -t ss4net1/multi-server ./server
       - name: Push server image
-        run: docker push ss4net/multi-server
+        run: docker push ss4net1/multi-server
 
       - name: Build worker image
-        run: docker build -t ss4net/multi-worker ./worker
+        run: docker build -t ss4net1/multi-worker ./worker
       - name: Push worker image
-        run: docker push ss4net/multi-worker
+        run: docker push ss4net1/multi-worker

@@ -18,7 +18,7 @@ jobs:
       - run: docker build -t test-client -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true test-client npm test
 
-      - name: Log in to Docker Hub.
+      - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -27,20 +27,24 @@ jobs:
       - name: Build client image
         run: docker build -t ss4net1/multi-client ./client
       - name: Push client image
+        run: docker login -u ss4net1
         run: docker push ss4net1/multi-client
 
       - name: Build nginx image
         run: docker build -t ss4net1/multi-nginx ./nginx
       - name: Push nginx image
+        run: docker login -u ss4net1
         run: docker push ss4net1/multi-nginx
 
       - name: Build server image
         run: docker build -t ss4net1/multi-server ./server
       - name: Push server image
+        run: docker login -u ss4net1
         run: docker push ss4net1/multi-server
 
       - name: Build worker image
         run: docker build -t ss4net1/multi-worker ./worker
       - name: Push worker image
+        run: docker login -u ss4net1
         run: docker push ss4net1/multi-worker
 

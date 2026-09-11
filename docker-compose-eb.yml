@@ -4,7 +4,7 @@ services:
       image: ss4net1/multi-client
       mem_limit: 128m
     server:
-      image: ss4net1/multi-server
+      image:ss4net1/multi-server
       mem_limit: 128m
     worker:
       image: ss4net1/multi-worker

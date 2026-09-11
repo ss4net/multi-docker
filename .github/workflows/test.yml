@@ -33,7 +33,7 @@ jobs:
 
       - name: Build server image
         run: docker build -t ss4net1/multi-server ./server
-      - name: Push server image
+      - name: Push server image  
         run: docker push ss4net1/multi-server
 
       - name: Build worker image
@@ -41,3 +41,18 @@ jobs:
       - name: Push worker image
         run: docker push ss4net1/multi-worker
 
+      - name: Generate deployment package
+        run: |
+          cp docker-compose-eb.yml docker-compose.yml
+          zip -r deploy.zip docker-compose.yml
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: multi-docker
+          environment_name: Multi-docker-env
+          region: us-east-1
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
